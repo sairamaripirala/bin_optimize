@@ -3,7 +3,7 @@ An extension to bin_packing problem. The utility provides ability to optimize ex
 
     Usage:
     
-      from bin_optimzie import optimize
+      from bin_optimize import optimize
       
       bins = {'A': [6, 4.5, 4],
               'B': [4, 5, 2],
@@ -12,3 +12,9 @@ An extension to bin_packing problem. The utility provides ability to optimize ex
              }
       bin_to_reduce = 'B'
       optimize(bins, bin_to_reduce)
+
+      Output: 
+      
+      ({'Min_bin_size': 17},
+       {'A': [6, 4.5, 4, 2], 'C': [7, 2, 3, 5], 'D': [2, 2, 2, 2, 4, 4]})
+          
