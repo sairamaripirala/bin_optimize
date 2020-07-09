@@ -1,11 +1,12 @@
 ![Testing](https://github.com/saripirala/bin-optimize/workflows/Testing/badge.svg?branch=review)
+[![Documentation Status](https://readthedocs.org/projects/bin-optimize/badge/?version=latest)](https://bin-optimize.readthedocs.io/en/latest/?badge=latest)
 
 
 # bin_optimize
 
 This project is an extension to binpacking problem. The utility provides ability to optimize existing bins which are already allocated using any bin_packing algorithm into n-1 bins.
 
-Usage:
+## Usage:
     
     >>> from bin_optimize import optimize
     >>> bins = {'A': [6, 4.5, 4],
