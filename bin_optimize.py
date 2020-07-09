@@ -38,7 +38,7 @@ def optimize(bins_to_optimize, bin_to_reduce):
             optimize(bins, bin_to_reduce)
 
         Output:
-        ({'Min_bin_size': 17},
+        ({'min_bin_size': 17},
          {'A': [6, 4.5, 4, 2], 'C': [7, 2, 3, 5], 'D': [2, 2, 2, 2, 4, 4]})
     """
 
@@ -65,7 +65,7 @@ def optimize(bins_to_optimize, bin_to_reduce):
     except KeyError:
         LOGGER.error(
             'bin %s not found in the input bins %s', bin_to_reduce, bins)
-        return {'Error': 'Key  {} not found'.format(bin_to_reduce)}
+        return {'Error': 'bin  {} not found'.format(bin_to_reduce)}
 
     if not items_to_adj:
         LOGGER.error(
@@ -104,7 +104,7 @@ def optimize(bins_to_optimize, bin_to_reduce):
     if len(items_to_adj) > 0:
         bins[bin_to_reduce] = items_to_adj
         return optimize(bins, bin_to_reduce)
-    return {'Min_bin_size': min_bin_size}, bins
+    return {'min_bin_size': min_bin_size}, bins
 
 
 def find_nearest(inlist, K):
