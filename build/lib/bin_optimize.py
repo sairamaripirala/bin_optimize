@@ -57,7 +57,7 @@ def optimize(bins_to_optimize, bin_to_reduce):
             'Could not read input json, '
             'please check if the values '
             'are of type list %s, \nException:%s', bins, e)
-        return {'Error': 'Data parse Error'}
+        return
 
     try:
         items_to_adj = sorted(
@@ -65,7 +65,7 @@ def optimize(bins_to_optimize, bin_to_reduce):
     except KeyError:
         LOGGER.error(
             'bin %s not found in the input bins %s', bin_to_reduce, bins)
-        return {'Error': 'Key  {} not found'.format(bin_to_reduce)}
+        return None
 
     if not items_to_adj:
         LOGGER.error(
@@ -93,14 +93,12 @@ def optimize(bins_to_optimize, bin_to_reduce):
     """Adjust the items till the bin is close to full"""
     for key, val in avlble_spaces.items():
         grp_to_add = 0
-        while items_to_adj:
+        while (grp_to_add + sum(bins.get(key)) <= min_bin_size) \
+                and items_to_adj:
             grp_to_add = find_nearest(items_to_adj, avlble_spaces[key])
-            if (grp_to_add + sum(bins.get(key)) <= min_bin_size):
-                bins.get(key).append(grp_to_add)
-                avlble_spaces[key] = min_bin_size - sum(bins.get(key))
-                items_to_adj.remove(grp_to_add)
-            else:
-                break
+            bins.get(key).append(grp_to_add)
+            avlble_spaces[key] = sum(bins.get(key))
+            items_to_adj.remove(grp_to_add)
     if len(items_to_adj) > 0:
         bins[bin_to_reduce] = items_to_adj
         return optimize(bins, bin_to_reduce)
@@ -110,3 +108,14 @@ def optimize(bins_to_optimize, bin_to_reduce):
 def find_nearest(inlist, K):
     return inlist[min(range(len(inlist)),
                       key=lambda i: abs(inlist[i] - K))]
+
+
+if __name__ == '__main__':  # pragma: no coverage
+    orig_bins = {'A': [6000, 2500, 4000], 'B': [4000, 5000, 2000], 'E': [2],
+                 'C': [7000, 2000, 3000], 'D': [2500, 2000, 2000, 2000, 4000]}
+    key_to_opt = 'D'
+    bin_size, opt_bins = optimize(orig_bins, key_to_opt)
+    LOGGER.debug('Original bins - ' + str(orig_bins))
+    LOGGER.debug('Bin to optimize - ' + str(key_to_opt))
+    LOGGER.debug('Optimized bins - ' + str(opt_bins))
+    LOGGER.debug('Bin size' + str(bin_size))
