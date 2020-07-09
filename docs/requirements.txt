@@ -1,4 +1,4 @@
-Sphinx
+Sphinx>3
 sphinx-autodoc-typehints
 sphinx-material==0.0.30
 typed_ast
