@@ -4,7 +4,7 @@ html_theme = 'sphinx_material'
 html_theme_path = sphinx_material.html_theme_path()
 html_context = sphinx_material.get_html_context()
 html_sidebars = {
-    "**": ["globaltoc.html", "searchbox.html"]
+    '**': ['globaltoc.html', 'searchbox.html']
 }
 html_theme_options = {
     'base_url': 'http://bin-optimize.readthedocs.io',
