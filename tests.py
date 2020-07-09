@@ -43,8 +43,7 @@ class Testing(unittest.TestCase):
 
     def test_incorrect_json(self):
         test_set = {'A': [2], 'B': 4}
-        self.assertEqual({'Error': 'Data parse Error'},
-                         optimize(test_set, 'A'))
+        self.assertEqual({'Error': 'Data parse Error'}, optimize(test_set, 'A'))
 
     def test_incorrect_bin(self):
         test_set = {'A': [2], 'B': [4]}
