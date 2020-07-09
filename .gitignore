@@ -1,5 +1,10 @@
 env
 .idea
 dist
-build
+build/
 *.egg-info/
+_build/
+_static/
+_templates/
+.DS_Store/
+__pycache__/

@@ -25,21 +25,6 @@ def optimize(bins_to_optimize, bin_to_reduce):
 
     :rtype: tuple
 
-    **Example**
-
-    .. code-block:: python
-            bins = {'A': [6, 4.5, 4],
-                      'B': [4, 5, 2],
-                      'C': [7, 2, 3],
-                      'D': [2, 2, 2, 2, 4],
-                      'E': []
-                      }
-            bin_to_reduce = 'B'
-            optimize(bins, bin_to_reduce)
-
-        Output:
-        ({'min_bin_size': 17},
-         {'A': [6, 4.5, 4, 2], 'C': [7, 2, 3, 5], 'D': [2, 2, 2, 2, 4, 4]})
     """
 
     bins = copy.deepcopy(bins_to_optimize)
