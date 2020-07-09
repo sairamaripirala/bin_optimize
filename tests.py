@@ -49,7 +49,7 @@ class Testing(unittest.TestCase):
     def test_incorrect_bin(self):
         test_set = {'A': [2], 'B': [4]}
         remove_b = 'E'
-        self.assertEqual({'Error': 'Key  {} not found'.format(remove_b)},
+        self.assertEqual({'Error': 'bin  {} not found'.format(remove_b)},
                          optimize(test_set, remove_b))
 
     def test_empty_bin(self):
