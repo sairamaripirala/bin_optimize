@@ -1,9 +1,5 @@
 ![Testing](https://github.com/saripirala/bin-optimize/workflows/Testing/badge.svg?branch=review)
 
-![Coverage](image:: https://img.shields.io/codecov/c/github/sprockets/sprockets-postgres.svg?
-:target: https://codecov.io/github/sprockets/sprockets-postgres?branch=master
-
-
 
 # bin_optimize
 
