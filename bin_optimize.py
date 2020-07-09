@@ -79,7 +79,7 @@ def optimize(bins_to_optimize, bin_to_reduce):
     for key, val in avlble_spaces.items():
         grp_to_add = 0
         while items_to_adj:
-            grp_to_add = find_nearest(items_to_adj, avlble_spaces[key])
+            grp_to_add = __find_fit(items_to_adj, avlble_spaces[key])
             if (grp_to_add + sum(bins.get(key)) <= min_bin_size):
                 bins.get(key).append(grp_to_add)
                 avlble_spaces[key] = min_bin_size - sum(bins.get(key))
@@ -92,6 +92,6 @@ def optimize(bins_to_optimize, bin_to_reduce):
     return {'min_bin_size': min_bin_size}, bins
 
 
-def find_nearest(inlist, K):
+def __find_fit(inlist, K):
     return inlist[min(range(len(inlist)),
                       key=lambda i: abs(inlist[i] - K))]
