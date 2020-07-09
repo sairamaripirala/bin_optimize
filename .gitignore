@@ -9,11 +9,12 @@
 *.user
 *.userosscache
 *.sln.docstates
-.idea/
+.idea
 dist/
 .DS_Store
 env/
 .vscode
+build/
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)
