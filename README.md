@@ -1,3 +1,10 @@
+![Testing](https://github.com/saripirala/bin-optimize/workflows/Testing/badge.svg?branch=review)
+
+![Coverage](image:: https://img.shields.io/codecov/c/github/sprockets/sprockets-postgres.svg?
+:target: https://codecov.io/github/sprockets/sprockets-postgres?branch=master
+
+
+
 # bin_optimize
 
 This project is an extension to binpacking problem. The utility provides ability to optimize existing bins which are already allocated using any bin_packing algorithm into n-1 bins.
@@ -32,3 +39,4 @@ The input bins can also have an empty bin.
     >>> optimize(bins, bin_to_reduce)
     ({'min_bin_size': 15},
      {'A': [6, 4.5, 4], 'B': [4, 5, 2, 2, 2], 'C': [6, 4, 2, 2]})
+     

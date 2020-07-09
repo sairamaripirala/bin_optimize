@@ -37,8 +37,8 @@ jobs:
         run: coverage report && coverage xml
 
       - name: Upload Coverage
-        uses: codecov/codecov-action@v1
-        if: github.event_name == 'push' && github.repository == 'saripirala/bin_optimize'
+        uses: codecov/codecov-action@v1.0.4
+        if: github.event_name == 'push' && github.repository == 'saripirala/bin-optimize'
         with:
           token: ${{secrets.CODECOV_TOKEN}}
           file: build/coverage.xml
