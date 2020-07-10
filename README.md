@@ -1,7 +1,6 @@
 ![Testing](https://github.com/saripirala/bin-optimize/workflows/Testing/badge.svg?branch=review)
 [![Documentation Status](https://readthedocs.org/projects/bin-optimize/badge/?version=latest)](https://bin-optimize.readthedocs.io/en/latest/?badge=latest)
 [![codecov](https://codecov.io/gh/saripirala/bin_optimize/branch/review/graph/badge.svg)](https://codecov.io/gh/saripirala/bin_optimize)
-[![codecov](https://codecov.io/gh/saripirala/bin_optimize/branch/review/graph/badge.svg)](https://codecov.io/gh/saripirala/bin_optimize)
 
 # bin_optimize
 
