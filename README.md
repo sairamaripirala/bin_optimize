@@ -9,26 +9,26 @@ This project is an extension to binpacking problem. The utility provides ability
 ## Usage:
     
     >>> from bin_optimize import optimize
-    >>> bins = {'A': [6, 4.5, 4],
-                'B': [4, 5, 2],
-                'C': [7, 2, 3],
-                'D': [2, 2, 2, 2, 4],
-                }
-    >>> bin_to_reduce = 'B'
+    >>> bins = {'bin1': [('a1', 6), ('a5', 4.5), ('a9', 4)],
+                'b2': [('a2', 4), ('a6', 5), ('a10', 2)],
+                'b3': [('a3', 7), ('a7', 2), ('a11', 3)],
+                'b4': [('a4', 2), ('a8', 2), ('a12', 2), ('a13', 2), ('a15', 4)]}
+    >>> bin_to_reduce = 'b4'
     >>> optimize(bins, bin_to_reduce)
-    {'A': [6, 4.5, 4, 2], 'C': [7, 2, 3, 5], 'D': [2, 2, 2, 2, 4, 4]}
-
+        {'bin1': [('a1', 6), ('a5', 4.5), ('a9', 4), ('a8', 2)],
+         'b2': [('a2', 4), ('a6', 5), ('a10', 2), ('a12', 2), ('a15', 4)],
+         'b3': [('a3', 7), ('a7', 2), ('a11', 3), ('a13', 2), ('a4', 2)]}
 
 The input bins can also have an empty bin.
 
     >>> from bin_optimize import optimize
-    >>> bins = {'A': [6, 4.5, 4],
-                'B': [4, 5, 2],
-                'C': [],
-                'D': [2, 2, 2, 2, 4, 6],
-                }
-    >>> bin_to_reduce = 'D'
+    >>> bins = {'bin1': [('a1', 6), ('a5', 4.5), ('a9', 4)],
+                'b2': [('a2', 4), ('a6', 5), ('a10', 2)],
+                'b3': [],
+                'b4': [('a4', 2), ('a8', 2), ('a12', 2), ('a13', 2), ('a15', 4)]}
+    >>> bin_to_reduce = 'b4'
     >>> optimize(bins, bin_to_reduce)
-    ({'min_bin_size': 15},
-     {'A': [6, 4.5, 4], 'B': [4, 5, 2, 2, 2], 'C': [6, 4, 2, 2]})
+    {'bin1': [('a1', 6), ('a5', 4.5), ('a9', 4)],
+     'b2': [('a2', 4), ('a6', 5), ('a10', 2)],
+     'b3': [('a12', 2), ('a13', 2), ('a15', 4), ('a4', 2), ('a8', 2)]}
      
