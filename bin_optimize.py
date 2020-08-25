@@ -1,7 +1,9 @@
-"""The utility provides the ability to optimize the bins already arranged
-   using any bin packing algorithm into n-1 bins. The utility works on the
-   principle of filling the bin to the maximum, with closest fitting groups
-   in decreasing order.
+"""
+The utility provides the ability to optimize the bins already arranged
+using any bin packing algorithm into n-1 bins.
+
+The utility works on the principle of filling the bin with less
+weights/items with largest item from bin being reduced.
 """
 
 import copy
