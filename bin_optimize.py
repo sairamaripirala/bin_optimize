@@ -1,97 +1,42 @@
 """The utility provides the ability to optimize the bins already arranged
    using any bin packing algorithm into n-1 bins. The utility works on the
-   principle of filling the bin to the maximum, with closest fitting groups.
-
-   The input for the the utility is the existing bins configuration with a
-   list of items/groups present in the bin, key of the bin, whose contents
-   to be adjusted in the remaining bins.
+   principle of filling the bin to the maximum, with closest fitting groups
+   in decreasing order.
 """
+
 import copy
-import logging
-import math
-
-logging.basicConfig(format='%(levelname)s: %(asctime)s: %(message)s',
-                    datefmt='%m-%d-%Y %I:%M:%S %p',
-                    level=logging.DEBUG)
-LOGGER = logging.getLogger(__name__)
+import typing
+from typing import Dict, List
 
 
-def optimize(bins_to_optimize, bin_to_reduce):
+def optimize(bins_to_optimize: Dict[typing.Any, List[int]],
+             bin_to_reduce: typing.Any) \
+        -> typing.Dict[typing.Any, List[int]]:
     """
     :param bins_to_optimize: The bins to be optimized as n-1 as key, list pairs
-    :type bins_to_optimize: json
+    :type bins_to_optimize: dict
     :param bin_to_reduce: The bin to be adjusted in existing n-1 bins
     :type bin_to_reduce: str
 
-    :rtype: tuple
+    :rtype: dict
+    :raises: KeyError
 
     """
-
     bins = copy.deepcopy(bins_to_optimize)
 
-    """Calculate new minimum bin size required to accomodate"""
     try:
-        min_bin_size = \
-            math.ceil(
-                sum(
-                    sum(value) for key, value in bins.items()) / (
-                        len(bins) - 1)
-            )
-    except TypeError as e:
-        LOGGER.error(
-            'Could not read input json, '
-            'please check if the values '
-            'are of type list %s, \nException:%s', bins, e)
-        return {'Error': 'Data parse Error'}
-
-    try:
-        items_to_adj = sorted(
-            bins.pop(bin_to_reduce), key=int, reverse=True)
+        items_to_adj = bins.pop(bin_to_reduce)
     except KeyError:
-        LOGGER.error(
-            'bin %s not found in the input bins %s', bin_to_reduce, bins)
-        return {'Error': 'bin  {} not found'.format(bin_to_reduce)}
+        raise KeyError('bin %s not found', bin_to_reduce)
 
-    if not items_to_adj:
-        LOGGER.error(
-            'bin %s is empty, input - %s', bin_to_reduce, bins)
-        return bins
-
-    """"Calculate available space in each group and sort"""
-    avlble_spaces = {
-        k: (min_bin_size - sum(v)) for k, v in bins.items()
-    }
-
-    avlble_spaces = {
-        k: v for k, v in
-        sorted(
-            avlble_spaces.items(),
-            key=lambda item: item[1], reverse=True)
-    }
-
-    """If available depth in each bin is less than largest group
-       increase min_bin_size"""
-    max_depth = max(v for k, v in avlble_spaces.items())
-    if max_depth < max(items_to_adj):
-        min_bin_size += (max(items_to_adj) - max_depth)
+    """Calculate current weights for each bin"""
+    weights = {k: sum(v) for k, v in bins.items()}
 
     """Adjust the items till the bin is close to full"""
-    for key, val in avlble_spaces.items():
-        grp_to_add = 0
-        while items_to_adj:
-            grp_to_add = __find_fit(items_to_adj, avlble_spaces[key])
-            if (grp_to_add + sum(bins.get(key)) <= min_bin_size):
-                bins.get(key).append(grp_to_add)
-                avlble_spaces[key] = min_bin_size - sum(bins.get(key))
-                items_to_adj.remove(grp_to_add)
-            else:
-                break
-    if len(items_to_adj) > 0:
+    while items_to_adj:
+        select_bin = min(weights, key=lambda key: weights[key])
+        bins.get(select_bin).append(max(items_to_adj))
+        items_to_adj.remove(max(items_to_adj))
         bins[bin_to_reduce] = items_to_adj
         return optimize(bins, bin_to_reduce)
-    return {'min_bin_size': min_bin_size}, bins
-
-
-def __find_fit(inlist, K):
-    return inlist[min(range(len(inlist)),
-                      key=lambda i: abs(inlist[i] - K))]
+    return bins
