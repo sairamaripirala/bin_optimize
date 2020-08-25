@@ -7,13 +7,18 @@ weights/items with largest item from bin being reduced.
 """
 
 import copy
+import pprint
 import typing
-from typing import Dict, List
+
+pp = pprint.PrettyPrinter(indent=4)
+
+Bins = typing.Dict[typing.Any, typing.List[typing.Tuple[str, int]]]
+Key = typing.Any
 
 
-def optimize(bins_to_optimize: Dict[typing.Any, List[int]],
-             bin_to_reduce: typing.Any) \
-        -> typing.Dict[typing.Any, List[int]]:
+def optimize(to_optimize: Bins,
+             to_reduce: Key) -> Bins:
+
     """
     :param bins_to_optimize: The bins to be optimized as n-1 as key, list pairs
     :type bins_to_optimize: dict
@@ -24,18 +29,16 @@ def optimize(bins_to_optimize: Dict[typing.Any, List[int]],
     :raises: KeyError
 
     """
-    bins = copy.deepcopy(bins_to_optimize)
+    bins = copy.deepcopy(to_optimize)
 
     try:
-        items_to_adj = bins.pop(bin_to_reduce)
+        items_to_adj = bins.pop(to_reduce)
     except KeyError:
-        raise KeyError('bin %s not found', bin_to_reduce)
+        raise KeyError('bin %s not found', to_reduce)
 
-    while items_to_adj:
-        """Calculate current weights for each bin"""
-        weights = {k: sum(v) for k, v in bins.items()}
-        item = max(items_to_adj)
-        bins.get(
-            min(weights, key=lambda key: weights[key])).append(item)
-        items_to_adj.remove(item)
+    weights = {k: sum(y for x, y in v) for k, v in bins.items()}
+    for item in sorted(items_to_adj):
+        k = min(weights, key=lambda key: weights[key])
+        bins.get(k).append(item)
+        weights[k] += item[1]
     return bins
