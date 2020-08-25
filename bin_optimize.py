@@ -29,14 +29,11 @@ def optimize(bins_to_optimize: Dict[typing.Any, List[int]],
     except KeyError:
         raise KeyError('bin %s not found', bin_to_reduce)
 
-    """Calculate current weights for each bin"""
-    weights = {k: sum(v) for k, v in bins.items()}
-
-    """Adjust the items till the bin is close to full"""
     while items_to_adj:
-        select_bin = min(weights, key=lambda key: weights[key])
-        bins.get(select_bin).append(max(items_to_adj))
-        items_to_adj.remove(max(items_to_adj))
-        bins[bin_to_reduce] = items_to_adj
-        return optimize(bins, bin_to_reduce)
+        """Calculate current weights for each bin"""
+        weights = {k: sum(v) for k, v in bins.items()}
+        item = max(items_to_adj)
+        bins.get(
+            min(weights, key=lambda key: weights[key])).append(item)
+        items_to_adj.remove(item)
     return bins
