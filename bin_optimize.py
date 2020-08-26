@@ -38,5 +38,6 @@ def optimize(to_optimize: Bins,
     for item in sorted(items_to_adj):
         k = min(volumes, key=lambda key: volumes[key])
         bins.get(k).append(item)
-        volumes[k] += item[1]
+        if len(item) > 1:
+            volumes[k] += int(item[1])
     return bins
