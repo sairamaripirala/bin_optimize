@@ -92,6 +92,21 @@ class Testing(unittest.TestCase):
         resp = optimize(bins, 123)
         self.assertEqual(expected, resp)
 
+    def test_nbr_bins_empty_size(self):
+        bins = {123: [('a1', 0), ('a2', 4.5), ('a3', )],
+                345: [('a4', 4), ('a5', 5), ('a6', 2)],
+                567: [('a7', 0), ('a8', 2), ('a9', 3)],
+                789: [('a10', 2), ('a11', 2),
+                      ('a12', 2), ('a13', 2), ('a14', 4)]}
+
+        expected = {345: [('a4', 4), ('a5', 5), ('a6', 2)],
+                    567: [('a7', 0), ('a8', 2), ('a9', 3), ('a1', 0),
+                          ('a2', 4.5), ('a3', )],
+                    789: [('a10', 2), ('a11', 2), ('a12', 2), ('a13', 2),
+                          ('a14', 4)]}
+        resp = optimize(bins, 123)
+        self.assertEqual(expected, resp)
+
     def test_nbr_weights(self):
         bins = {123: [(102, 6), (107, 4.5), (112, 4)],
                 345: [(103, 4), (108, 5), (113, 2)],
