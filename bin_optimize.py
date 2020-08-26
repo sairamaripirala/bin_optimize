@@ -9,19 +9,22 @@ the bin to be reduced and add it to the bin with least total volume.
 import copy
 import typing
 
-Bins = typing.Dict[typing.Any, typing.List[typing.Union[str, int]]]
+Bins = typing.Dict[typing.Any, typing.List[typing.Tuple[str, int]]]
+"""Type annotation for Bins"""
+
 Key = typing.Any
+"""Type annotation for Key"""
 
 
 def optimize(to_optimize: Bins,
              to_reduce: Key) -> Bins:
     """
     :param to_optimize: The bins to be optimized as n-1 bins
-    :type to_optimize: dict
+    :type to_optimize: :data:`~bin_optimize.Bins`
     :param to_reduce: The bin to be adjusted in existing n-1 bins
-    :type to_reduce: str
+    :type to_reduce: :data:`~bin_optimize.Key`
 
-    :rtype: dict
+    :rtype: :data:`~bin_optimize.Bins`
     :raises: KeyError
     """
     bins = copy.deepcopy(to_optimize)

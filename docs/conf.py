@@ -1,5 +1,9 @@
+import os
+import sys
+
 import sphinx_material
 
+sys.path.insert(0, os.path.abspath('../'))
 html_theme = 'sphinx_material'
 html_theme_path = sphinx_material.html_theme_path()
 html_context = sphinx_material.get_html_context()
@@ -20,7 +24,6 @@ html_theme_options = {
     'color_accent': 'blue',
     'version_dropdown': False
 }
-html_static_path = ['_static']
 html_css_files = [
     'css/custom.css'
 ]

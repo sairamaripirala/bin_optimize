@@ -1,8 +1,9 @@
 Bin Optimization
 ==================
-This project is created as an extension to binpacking problem.
-The utility provides the ability to optimize existing bins into n-1 bins. 
-There is a provision to have identifers for weights.
+This project is an extension to binpacking problem. 
+The utility provides ability to optimize existing bins which are already allocated using any bin_packing algorithm into n-1 bins.
+
+The items in the bins are presented as a tuple of an identifier and volume of the item.
 
 Python versions supported: 3.7+
 
@@ -37,3 +38,4 @@ Module
    :maxdepth: 1
 
    bin_optimize
+   typing
