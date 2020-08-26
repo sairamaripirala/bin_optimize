@@ -1,7 +1,8 @@
 Bin Optimization
 ==================
-This project is created as an extension to binpacking problem. 
-The utility provides the ability to optimize existing bins into n-1 bins.
+This project is created as an extension to binpacking problem.
+The utility provides the ability to optimize existing bins into n-1 bins. 
+There is a provision to have identifers for weights.
 
 Python versions supported: 3.7+
 
@@ -16,14 +17,15 @@ Installation
 Usage:
     
     >>> from bin_optimize import optimize
-    >>> bins = {'A': [6, 4.5, 4],
-                'B': [4, 5, 2],
-                'C': [7, 2, 3],
-                'D': [2, 2, 2, 2, 4],
-                }
-    >>> bin_to_reduce = 'B'
-    >>> optimize(bins, bin_to_reduce)
-      {'A': [6, 4.5, 4, 2], 'C': [7, 2, 3, 5], 'D': [2, 2, 2, 2, 4, 4]}
+    >>> bins = {'b1': [('a1', 6), ('a5', 4.5), ('a9', 4)],
+                'b2': [('a2', 4), ('a6', 5), ('a10', 2)],
+                'b3': [('a3', 7), ('a7', 2), ('a11', 3)],
+                'b4': [('a4', 2), ('a8', 2), ('a12', 2), ('a13', 2), ('a15', 4)]}
+    >>> to_reduce = 'b4'
+    >>> optimize(bins, to_reduce)
+        {'b1': [('a1', 6), ('a5', 4.5), ('a9', 4), ('a8', 2)],
+         'b2': [('a2', 4), ('a6', 5), ('a10', 2), ('a12', 2), ('a15', 4)],
+         'b3': [('a3', 7), ('a7', 2), ('a11', 3), ('a13', 2), ('a4', 2)]}
 
 The result is a dict with optimied bins.
 
