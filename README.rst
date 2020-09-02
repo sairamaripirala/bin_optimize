@@ -1,4 +1,4 @@
-|Testing| |Documentation Status| |codecov|
+|Version| |License| |Testing| |Documentation Status| |codecov|
 
 bin\_optimize
 =============
@@ -59,8 +59,12 @@ Run the test suite from the project root using:
 
     flake8 && coverage run && coverage report
 
+
 .. |Testing| image:: https://github.com/saripirala/bin-optimize/workflows/Testing/badge.svg?branch=master
 .. |Documentation Status| image:: https://readthedocs.org/projects/bin-optimize/badge/?version=latest
    :target: https://bin-optimize.readthedocs.io/en/latest/?badge=latest
 .. |codecov| image:: https://codecov.io/gh/saripirala/bin-optimize/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/saripirala/bin-optimize
+.. |License| image:: https://img.shields.io/github/license/saripirala/bin-optimize
+   :target: https://codecov.io/gh/saripirala/bin-optimize
+.. |Version| image:: https://img.shields.io/pypi/v/bin-optimize
